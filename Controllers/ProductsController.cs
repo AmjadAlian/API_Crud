@@ -8,7 +8,7 @@ namespace API_Crud.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        List<Product> studnets = new List<Product>{
+        List<Product> products = new List<Product>{
         new Product {Id=1, Name="example1",description="example1" },
         new Product {Id=2, Name="example2",description=" example2" },
         new Product {Id=3, Name="example3",description="example3" },
@@ -18,13 +18,13 @@ namespace API_Crud.Controllers
         [HttpGet]
         public IActionResult GetAll ()
         {
-            return Ok(studnets);
+            return Ok(products);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById (int id) {
          
-            var Product = studnets.FirstOrDefault(Product=>Product.Id == id);
+            var Product = products.FirstOrDefault(Product=>Product.Id == id);
         
             if (Product == null)
             {
@@ -44,7 +44,7 @@ namespace API_Crud.Controllers
             }
             var Product = new Product { Id = request.Id , Name = request.Name , description=request.description };
 
-            studnets.Add(Product);
+            products.Add(Product);
             return Ok(Product);
 
         }
@@ -52,7 +52,7 @@ namespace API_Crud.Controllers
 
         public IActionResult Update (int id,Product request)
         {
-            var currentProduct = studnets.FirstOrDefault(Product=>Product.Id == id);
+            var currentProduct = products.FirstOrDefault(Product=>Product.Id == id);
 
             if(currentProduct == null)
             {
@@ -67,12 +67,12 @@ namespace API_Crud.Controllers
         [HttpDelete ("{id}")]
 
         public IActionResult Delete (int id) {
-        var Product = studnets.FirstOrDefault(Product=>Product.Id == id);
+        var Product = products.FirstOrDefault(Product=>Product.Id == id);
             if (Product is null)
             {
                 return NotFound();
             }
-            studnets.Remove(Product);
+            products.Remove(Product);
             return Ok();
         }
 
